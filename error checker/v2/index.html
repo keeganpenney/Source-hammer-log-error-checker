@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HL2 Error Checker</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            max-width: 800px; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        h1 { text-align: center; }
+        label { font-weight: bold; }
+        /* Container for line numbers and textarea */
+        .log-container {
+            display: flex; 
+            border: 1px solid #ccc; 
+            height: 300px; 
+            overflow: hidden;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        #lineNumbers {
+            background-color: #f0f0f0; 
+            padding: 5px; 
+            text-align: right; 
+            user-select: none; 
+            overflow: hidden;
+            width: 60px; /* Increased width to accommodate up to 999 lines */
+            border-right: 1px solid #ccc;
+            white-space: pre;
+        }
+        #log {
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            padding: 5px; 
+            resize: none; 
+            font-family: monospace; 
+            font-size: 12px;
+            overflow: auto;
+            white-space: pre; /* Prevent line wrapping */
+            word-wrap: normal; /* Prevent line wrapping */
+        }
+        button { 
+            margin-top: 10px; 
+            padding: 10px 15px; 
+            font-size: 14px; 
+            cursor: pointer;
+        }
+        .error { 
+            background-color: #ffe6e6; 
+            padding: 10px; 
+            border: 1px solid #ff0000; 
+            margin-top: 10px; 
+            position: relative;
+        }
+        .error h3 { 
+            margin: 0; 
+            cursor: pointer; 
+            text-decoration: underline;
+            color: #d8000c;
+        }
+        .error p { 
+            margin: 5px 0; 
+        }
+        /* Tooltip styles */
+        .tooltip {
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            display: none;
+            max-width: 300px;
+            word-wrap: break-word;
+            z-index: 100;
+            top: 100%;
+            left: 0;
+        }
+        /* Highlighted selection */
+        #log::selection {
+            background: #ffd54f;
+        }
+        #log::-moz-selection {
+            background: #ffd54f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HL2 Error Checker</h1>
+
+    <label for="config">Select Game Configuration:</label><br>
+    <select id="config">
+        <option value="hl2">Half-Life 2</option>
+        <option value="css">Counter-Strike: Source</option>
+        <!-- Add more configurations as needed -->
+    </select>
+
+    <br><br>
+
+    <label for="log">Paste your compile log here:</label><br>
+    <div class="log-container">
+        <div id="lineNumbers">1</div>
+        <textarea id="log" placeholder="Paste your compile log here..." onscroll="syncScroll()" oninput="updateLineNumbers()" onkeyup="updateLineNumbers()" wrap="off"></textarea>
+    </div>
+
+    <br>
+
+    <button onclick="checkErrors()">Check Errors</button>
+    <button onclick="clearAll()">Clear</button>
+    <button onclick="downloadReport()">Download Report</button>
+
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
