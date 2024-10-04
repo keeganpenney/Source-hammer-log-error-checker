@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HL2 Error Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 200px; }
+        select, button { margin-top: 10px; }
+        .error { background-color: #ffe6e6; padding: 10px; border: 1px solid #ff0000; margin-top: 10px; }
+        .error h3 { margin: 0; }
+        .error p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+    <h1>HL2 Error Checker</h1>
+
+    <label for="config">Select Game Configuration:</label><br>
+    <select id="config">
+        <option value="hl2">Half-Life 2</option>
+        <option value="css">Counter-Strike: Source</option>
+        <!-- Add more configurations as needed -->
+    </select>
+
+    <br><br>
+
+    <label for="log">Paste your compile log here:</label><br>
+    <textarea id="log" placeholder="Paste your compile log here..."></textarea>
+
+    <br>
+
+    <button onclick="checkErrors()">Check Errors</button>
+
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
